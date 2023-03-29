@@ -1,5 +1,5 @@
 
-import { useState, useRef } from 'react';
+import { useState} from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Button } from 'primereact/button';
 import { Column } from "primereact/column";
@@ -7,13 +7,14 @@ import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
 
 
-function TableC(props) {
+function Table(props) {
 
 
-    const dtRef = useRef(null);
+  
 
-    const { columns, posts, refresh, filter, pagination } = props
-
+    const { columns, posts, refresh, filter, pagination ,fetchUser} = props
+       
+    console.log(posts)
 
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS }
@@ -21,9 +22,7 @@ function TableC(props) {
 
 
     function reset() {
-        if (dtRef.current) {
-            dtRef.current.reset();
-        }
+        fetchUser()
     }
 
     return (
@@ -73,4 +72,4 @@ function TableC(props) {
     )
 }
 
-export default TableC
+export default Table

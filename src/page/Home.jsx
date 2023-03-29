@@ -9,12 +9,17 @@ function TableOne() {
     const [tabOnePosts, setTabOnePosts] = useState([])
     const [tabTwoPost, setTabTwoPost] = useState([])
 
-    useEffect(() => {
+    const fetchUser = () => {
         axios
-            .get("https://jsonplaceholder.typicode.com/users")
-            .then((res) =>
-                setTabTwoPost(res.data));
-    }, []);
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((res) =>
+            setTabTwoPost(res.data));
+
+    }
+
+    useEffect(() => {
+        fetchUser()
+    },[]);
 
     useEffect(() => {
         axios
@@ -55,10 +60,13 @@ function TableOne() {
                         filter={true} />
                 </TabPanel>
 
-                <TabPanel header="Users">                 
-                    <Table columns={tableTwoColumns} 
-                    posts={tabTwoPost} 
-                    refresh={true} />
+                <TabPanel header="Users">
+                    <Table columns={tableTwoColumns}
+                        posts={tabTwoPost}
+                        refresh={true}
+                        fetchUser={fetchUser}
+                        />
+                        
                 </TabPanel>
 
             </TabView>
